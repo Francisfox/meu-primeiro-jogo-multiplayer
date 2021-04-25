@@ -61,19 +61,21 @@
                 }
             }
             const game = createGame()
-
-            document.addEventListener('keydown', handleKeydown)
+            const KeyboardListener = createKeyboardListener()
             
-            function handleKeydown(event){
-                const keyPressed = event.key   
+            function createKeyboardListener(){
+                document.addEventListener('keydown', handleKeydown)
                 
-                const command = {
-                    playerId: 'player1',
-                    keyPressed
+                function handleKeydown(event){
+                    const keyPressed = event.key   
+                    
+                    const command = {
+                        playerId: 'player1',
+                        keyPressed
+                    }
+                    game.movePlayer(command)
                 }
-                game.movePlayer(command)
             }
-
             renderScreen()
 
             function renderScreen() {
