@@ -63,8 +63,21 @@
             
             const game = createGame()
             const KeyboardListener = createKeyboardListener()
+            KeyboardListener.subscribe(game.movePlayer)
             
             function createKeyboardListener(){
+                const state = {
+                    observers: []                    
+                }
+                function subscribe (observerFunction) {
+                    state.observers.push(observerFunction)
+                }
+                function notifyAll(command) {
+                    console.log(`Notifying ${state.observers.length} observers`)
+                    for (const observerFunction of state.observers) {
+                        observerFunction(command)
+                    }
+                }
                 document.addEventListener('keydown', handleKeydown)
                 
                 function handleKeydown(event){
@@ -74,9 +87,13 @@
                         playerId: 'player1',
                         keyPressed
                     }
-                    game.movePlayer(command)
+                    notifyAll(command)
+                }
+                return{
+                    subscribe
                 }
             }
+
             renderScreen()
 
             function renderScreen() {
