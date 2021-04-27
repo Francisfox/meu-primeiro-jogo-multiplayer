@@ -90,12 +90,26 @@
                     }
 
                     const keyPressed = command.keyPressed
-                    const player = state.players[command.playerId]
+                    const   playerId = command.playerId
+                    const player = state.players[ playerId]
                     const moverFunction = acceptedMoves[keyPressed]
                     if (player && moverFunction){
                         moverFunction(player)
+                        checkForFruitCollision(playerId)
                     }
                 }    
+                function checkForFruitCollision(){
+                    const player = state.players[playerId]
+                    
+                    for (const fruitId in state.fruits){
+                        const fruit = state.fruits[fruitId]
+                        console.log(`Checking ${playerId} and ${fruitId}`)
+                        if (player.x === fruit.x && player.y === fruit.y){
+                            console.log(`COLLISION Between ${playerId} and ${fruitId}`)
+                            removeFruit({fruitId: fruitId})
+                        }
+                    }                    
+                }
                 return{
                     addPlayer,
                     removePlayer,
@@ -110,6 +124,9 @@
             const KeyboardListener = createKeyboardListener()
             KeyboardListener.subscribe(game.movePlayer)
             
+            game.addPlayer({ playerId: 'player1', playerX: 0, playerY: 0})
+            game.addFruit({fruitId: 'fruit1', fruitX: 3, fruitY: 3})
+
             function createKeyboardListener(){
                 const state = {
                     observers: []                    
