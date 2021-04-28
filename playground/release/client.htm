@@ -15,7 +15,8 @@
     </head>
     <body>
         <canvas id="screen" width="10" height="10"></canvas>
-        <script>
+        <script type="module">
+            import createKeyboardListener from './KeyboardListener.js'
             const screen = document.getElementById('screen')
             const context = screen.getContext('2d')
             const currentPlayerId = 'player1'
@@ -98,7 +99,7 @@
                         checkForFruitCollision(playerId)
                     }
                 }    
-                function checkForFruitCollision(){
+                function checkForFruitCollision(playerId){
                     const player = state.players[playerId]
                     
                     for (const fruitId in state.fruits){
@@ -127,34 +128,7 @@
             game.addPlayer({ playerId: 'player1', playerX: 0, playerY: 0})
             game.addFruit({fruitId: 'fruit1', fruitX: 3, fruitY: 3})
 
-            function createKeyboardListener(){
-                const state = {
-                    observers: []                    
-                }
-                function subscribe (observerFunction) {
-                    state.observers.push(observerFunction)
-                }
-                function notifyAll(command) {
-                    console.log(`Notifying ${state.observers.length} observers`)
-                    for (const observerFunction of state.observers) {
-                        observerFunction(command)
-                    }
-                }
-                document.addEventListener('keydown', handleKeydown)
-                
-                function handleKeydown(event){
-                    const keyPressed = event.key   
-                    
-                    const command = {
-                        playerId: 'player1',
-                        keyPressed
-                    }
-                    notifyAll(command)
-                }
-                return{
-                    subscribe
-                }
-            }
+            
 
             renderScreen()
 
