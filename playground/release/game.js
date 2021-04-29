@@ -41,30 +41,28 @@ export default function createGame(){
     }
 
     function movePlayer(command){
-        console.log(`Moving ${command.playerId} with ${command.keyPressed}`)
-        
+         
         const acceptedMoves = {
             ArrowUp(player) {
-                console.log(`Moving player Up`)
-                if (player.y - 1 >= 0){
+                 if (player.y - 1 >= 0){
                     player.y = player.y - 1 
                 } 
             },
             ArrowRight(player) {
-                console.log(`Moving player Right`)
+
                 if (player.x + 1 < state.screen.width){
                     player.x = player.x + 1
                     return
                 }
             },
             ArrowDown(player) {
-                console.log(`Moving player Down`)
+
                 if (player.y + 1 < state.screen.height){
                     player.y = player.y + 1
                 }
             },
             ArrowLeft(player) {
-                console.log(`Moving player Left`)
+                
                 if (player.x - 1 >= 0){
                     player.x = player.x - 1
                 }
@@ -85,9 +83,9 @@ export default function createGame(){
         
         for (const fruitId in state.fruits){
             const fruit = state.fruits[fruitId]
-            console.log(`Checking ${playerId} and ${fruitId}`)
+            //console.log(`Checking ${playerId} and ${fruitId}`)
             if (player.x === fruit.x && player.y === fruit.y){
-                console.log(`COLLISION Between ${playerId} and ${fruitId}`)
+                //console.log(`COLLISION Between ${playerId} and ${fruitId}`)
                 removeFruit({fruitId: fruitId})
             }
         }                    
