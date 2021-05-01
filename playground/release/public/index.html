@@ -12,7 +12,7 @@
                 height: 400px;
             }
         </style>
-     //   <script src="socket.io/socket.io.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
         <canvas id="screen" width="10" height="10"></canvas>
@@ -30,12 +30,18 @@
             
             renderScreen(screen, game, requestAnimationFrame)
              
-         //   const socket = io()
+            const socket = io()
 
-        //    socket.on('connect', () => {
-         //       const playerId = socket.id
-          //      console.log(`Player connect on Client with id ${playerId}`)
-         //    }) 
+            socket.on('connect', () => {
+                const playerId = socket.id
+                console.log(`Player connect on Client with id ${playerId}`)
+            }) 
+            socket.on('setup', (state) => {
+                console.log(`Receiving "setup" event from server`)
+                console.log(state)
+
+                game.state = state
+            })
         </script>
     </body>
 </html>
