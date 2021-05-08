@@ -1,4 +1,9 @@
 export default function createGame(){
+        ///playground/release
+        //npm init
+        //npm i express
+        //npm i socket.io
+        //npx nodemon
     const state = {
         players:{},
         fruits:{},
