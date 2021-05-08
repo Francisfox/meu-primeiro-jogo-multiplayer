@@ -1,9 +1,4 @@
 export default function createGame(){
-        ///playground/release
-        //npm init
-        //npm i express
-        //npm i socket.io
-        //npx nodemon
     const state = {
         players:{},
         fruits:{},
@@ -19,12 +14,12 @@ export default function createGame(){
 
     function addPlayer(command) {
         const playerId = command.playerId
-        const playerX = 'playerX' in command ? command.playerX : Meth.floor(Meth.randdom() * state.screen.width)
-        const playerY = 'playerY' in command ? command.playerY : Meth.floor(Meth.randdom() * state.screen.height)
+        const playerX = 4 //'playerX' in command ? command.playerX : Meth.floor(Meth.randdom() * state.screen.width)
+        const playerY = 4 //'playerY' in command ? command.playerY : Meth.floor(Meth.randdom() * state.screen.height)
 
         state.players[playerId] = {
             x: playerX,
-            y:playerY
+            y: playerY
         }
     }
 

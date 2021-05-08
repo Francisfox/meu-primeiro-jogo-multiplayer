@@ -10,9 +10,8 @@ const sockets = socketio(server)
 app.use(express.static('public'))
 
 const game = createGame()       
-game.addPlayer({ playerId: 'player1', playerX: 0, playerY: 0})
- 
-sockets.on('connection', (socket) => {
+
+    sockets.on('connection', (socket) => {
     const playerId = socket.id
     console.log(`Player connect on Server with id ${playerId}`)
 
