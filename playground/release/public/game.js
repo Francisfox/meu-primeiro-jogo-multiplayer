@@ -12,10 +12,15 @@ export default function createGame(){
             height: 10
         }
     } 
+
+    function setState(newState){
+        Object.assign(state, newState)
+    }
+
     function addPlayer(command) {
         const playerId = command.playerId
-        const playerX = command.playerX
-        const playerY = command.playerY
+        const playerX = 'playerX' in command ? command.playerX : Meth.floor(Meth.randdom() * state.screen.width)
+        const playerY = 'playerY' in command ? command.playerY : Meth.floor(Meth.randdom() * state.screen.height)
 
         state.players[playerId] = {
             x: playerX,
@@ -101,6 +106,7 @@ export default function createGame(){
         addFruit,
         removeFruit,
         movePlayer,
-        state
+        state,
+        setState
     }
 }
