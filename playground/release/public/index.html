@@ -26,19 +26,33 @@
             const KeyboardListener = createKeyboardListener(document)
             KeyboardListener.subscribe(game.movePlayer)
             
-            const screen = document.getElementById('screen')
             
-            renderScreen(screen, game, requestAnimationFrame)
-             
             const socket = io()
 
             socket.on('connect', () => {
                 const playerId = socket.id
                 console.log(`Player connect on Client with id ${playerId}`)
+
+                const screen = document.getElementById('screen')
+                renderScreen(screen, game, requestAnimationFrame, playerId)
             }) 
              
             socket.on('setup', (state) => {
-                game.setState(state)    
+                const playerId = socket.id
+                game.setState(state)   
+                
+                KeyboardListener.registerPlayerId(playerId)
+                KeyboardListener.subscribe(game.movePlayer)
+                
+            })
+
+            socket.on('add-player', (command) =>{
+                //console.log(`> Player connect: ${playerId}`) errado   
+                game.addPlayer(command)
+            })
+            socket.on('remove-player', (command) =>{
+                //console.log(`> Player connect: ${playerId}`) errado   
+                game.removePlayer(command)
             })
         </script>
     </body>

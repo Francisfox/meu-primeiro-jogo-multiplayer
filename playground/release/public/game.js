@@ -11,10 +11,9 @@ export default function createGame(){
     const observers = [] 
 
         function subscribe (observerFunction) {
-        observers.push(observerFunction)
+             observers.push(observerFunction)
     }
     function notifyAll(command) {
-        //console.log(`Notifying ${state.observers.length} observers`)
         for (const observerFunction of observers) {
             observerFunction(command)
         }
@@ -44,6 +43,11 @@ export default function createGame(){
         const playerId = command.playerId
 
         delete state.players[playerId]
+
+        notifyAll({
+            type: 'remove-player', 
+            playerId: playerId
+        })
     }
     function addFruit(command) {
         const fruitId= command.fruitId
