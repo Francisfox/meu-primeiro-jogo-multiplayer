@@ -43,6 +43,9 @@
                 
                 KeyboardListener.registerPlayerId(playerId)
                 KeyboardListener.subscribe(game.movePlayer)
+                KeyboardListener.subscribe((command) => {
+                    socket.emit('move-player', command)
+                })
                 
             })
 
@@ -53,6 +56,13 @@
             socket.on('remove-player', (command) =>{
                 //console.log(`> Player connect: ${playerId}`) errado   
                 game.removePlayer(command)
+            })
+            socket.on('move-player', (command) =>{
+                //console.log(`> Player connect: ${playerId}`) errado  
+                const playerId = socket.id 
+                if(playerId !== command.playerId){ 
+                game.movePlayer(command)
+                }
             })
         </script>
     </body>

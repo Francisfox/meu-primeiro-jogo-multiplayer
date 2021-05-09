@@ -27,7 +27,13 @@ const game = createGame()
     socket.on('disconnect', () => {
         game.removePlayer({playerId: playerId })
         console.log(`> Player disconnect: ${playerId}`)
+    })
 
+    socket.on('move-player', (command) => {
+        command.playerId = playerId
+        command.type = 'move-player'
+
+        game.movePlayer(command)
     })
 }) 
 
