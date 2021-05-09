@@ -8,19 +8,36 @@ export default function createGame(){
         }
     } 
 
+    const observers = [] 
+
+        function subscribe (observerFunction) {
+        observers.push(observerFunction)
+    }
+    function notifyAll(command) {
+        //console.log(`Notifying ${state.observers.length} observers`)
+        for (const observerFunction of observers) {
+            observerFunction(command)
+        }
+    }
+     
     function setState(newState){
         Object.assign(state, newState)
     }
 
     function addPlayer(command) {
         const playerId = command.playerId
-        const playerX = 4 //'playerX' in command ? command.playerX : Meth.floor(Meth.randdom() * state.screen.width)
-        const playerY = 4 //'playerY' in command ? command.playerY : Meth.floor(Meth.randdom() * state.screen.height)
-
+        const playerX = 'playerX' in command ? command.playerX : Math.floor(Math.random() * state.screen.width) 
+        const playerY = 'playerY' in command ? command.playerY : Math.floor(Math.random() * state.screen.height)
         state.players[playerId] = {
             x: playerX,
             y: playerY
         }
+        notifyAll({
+            type: 'add-player',
+            playerId: playerId,
+            playerX: playerX,
+            playerY: playerY
+        })
     }
 
     function removePlayer(command) {
@@ -102,6 +119,7 @@ export default function createGame(){
         removeFruit,
         movePlayer,
         state,
-        setState
+        setState, 
+        subscribe    
     }
 }
