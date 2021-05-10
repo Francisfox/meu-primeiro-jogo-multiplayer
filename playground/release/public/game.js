@@ -66,7 +66,7 @@ export default function createGame(){
         delete state.fruits[fruitId]
     }
 
-    function movePlayer(command){
+    function movePlayer(command) {
         notifyAll(command)
          
         const acceptedMoves = {
@@ -110,7 +110,6 @@ export default function createGame(){
         
         for (const fruitId in state.fruits){
             const fruit = state.fruits[fruitId]
-            //console.log(`Checking ${playerId} and ${fruitId}`)
             if (player.x === fruit.x && player.y === fruit.y){
                 //console.log(`COLLISION Between ${playerId} and ${fruitId}`)
                 removeFruit({fruitId: fruitId})

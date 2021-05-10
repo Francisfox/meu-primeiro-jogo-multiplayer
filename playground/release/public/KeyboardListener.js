@@ -3,7 +3,7 @@ export default function createKeyboardListener(){
         observers: [],
         playerId: null                    
     }
-    function registerPlayerId (playerId){
+    function registerPlayerId(playerId) {
         state.playerId = playerId
     }
     function subscribe (observerFunction) {

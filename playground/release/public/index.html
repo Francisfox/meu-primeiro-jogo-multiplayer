@@ -57,11 +57,13 @@
                 //console.log(`> Player connect: ${playerId}`) errado   
                 game.removePlayer(command)
             })
-            socket.on('move-player', (command) =>{
-                //console.log(`> Player connect: ${playerId}`) errado  
+            socket.on('move-player', (command) => {
+                console.log(`> Receiving ${command.type} -> ${command.playerId}`) 
+
                 const playerId = socket.id 
-                if(playerId !== command.playerId){ 
-                game.movePlayer(command)
+
+                if (playerId !== command.playerId){ 
+                    game.movePlayer(command)
                 }
             })
         </script>
