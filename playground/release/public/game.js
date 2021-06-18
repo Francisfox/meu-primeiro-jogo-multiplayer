@@ -1,4 +1,7 @@
 export default function createGame(){
+    //npm init
+    //npm i express
+    //npx nodemon
     const state = {
         players:{},
         fruits:{},
