@@ -1,3 +1,10 @@
+//npm init -y
+//npm isntall express --save
+//npm install socket.io
+
+//para rodar a aplicação no servidor node entrar na pasta 
+//cd playground/1st-release
+//node .
 import express from 'express'
 import http from 'http'
 import createGame from './public/game.js'
